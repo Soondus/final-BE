@@ -1,8 +1,6 @@
 const http = require('http');
 const app = require('./app');
 
-app.use(express.static(path.resolve(__dirname, '../frontend/App')));
-
 const normalizePort = val => {
   const port = parseInt(val, 10);
 

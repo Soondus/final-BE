@@ -12,13 +12,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api',(req, res, next) => {
+app.post('/api',(req, res, next) => {
     console.log('Request received');
     res.json({message: "Hello from server!"});
     next();
 });
 
-app.post('/api',(req, res, next) => {
+app.get('/api',(req, res, next) => {
     res.status(201);
     next();
 });
