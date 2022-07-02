@@ -3,11 +3,105 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('./models/user');
-const Trip = require('./models/trip');
 
+router.post('/', (req, res, next) => {
+  const thing = new Thing({
+    title: req.body.title,
+    description: req.body.description,
+    imageUrl: req.body.imageUrl,
+    price: req.body.price,
+    userId: req.body.userId
+  });
+  thing.save().then(
+    () => {
+      res.status(201).json({
+        message: 'Post saved successfully!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+router.get('/:id', (req, res, next) => {
+  Thing.findOne({
+    _id: req.params.id
+  }).then(
+    (thing) => {
+      res.status(200).json(thing);
+    }
+  ).catch(
+    (error) => {
+      res.status(404).json({
+        error: error
+      });
+    }
+  );
+});
+
+router.put('/:id', (req, res, next) => {
+  const thing = new Thing({
+    _id: req.params.id,
+    title: req.body.title,
+    description: req.body.description,
+    imageUrl: req.body.imageUrl,
+    price: req.body.price,
+    userId: req.body.userId
+  });
+  Thing.updateOne({_id: req.params.id}, thing).then(
+    () => {
+      res.status(201).json({
+        message: 'Thing updated successfully!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+router.delete('/:id', (req, res, next) => {
+  Thing.deleteOne({_id: req.params.id}).then(
+    () => {
+      res.status(200).json({
+        message: 'Deleted!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+router.get('/' +
+  '', (req, res, next) => {
+  Thing.find().then(
+    (things) => {
+      res.status(200).json(things);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+module.exports = router;
 
 //once logged in
-    router.post('/Tripdetails/:id',(req,res,next)=> {
+    router.post('/TripDetails/:id',(req,res,next)=> {
         console.log(req.body); 
 
     //get all trips
@@ -45,13 +139,13 @@ const Trip = require('./models/trip');
             }
         );
 
-   //etails
+   //details
 
 
     //mongoose allows us to modify things
     //allow user to change their details -- must be logged in
 
-    router.put('/myaccount/:id', (req, res, next) => {
+    router.put('/:id', (req, res, next) => {
  //we need to create a new thing and 
  //update the thing in its position
  //but if we create a new thing it will create a new id

@@ -7,7 +7,7 @@ const User = require('../models/user');
 const Trip = require('../models/trip');
 
 const userRoutes = require('./routes/before_login');
-const tripRoutes = require('./routes/after_login');
+const tripRoutes = require('./routes/userDetails');
 
 
 
@@ -30,6 +30,6 @@ app.use((req, res, next) => {
 });
 
 //app.use('/api/auth', userRoutes);
-//app.use('/api/trips', tripRoutes);
+//app.use('/api/trip-details', tripRoutes);
 
 module.exports = app;
