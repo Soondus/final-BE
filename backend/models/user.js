@@ -1,7 +1,7 @@
 //we need to import this on the app.js file
 const mongoose = require('mongoose');
 
-//const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator');
 
 //contains all the fields our model is going to contain
 const userSchema = mongoose.Schema({
@@ -18,5 +18,5 @@ const userSchema = mongoose.Schema({
   });
   //id automatically generated
   //we can now import this model into our app
-  //userSchema.plugin(uniqueValidator);
+  userSchema.plugin(uniqueValidator);
   module.exports = mongoose.model('person', userSchema);

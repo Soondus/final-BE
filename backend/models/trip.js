@@ -12,4 +12,4 @@ const tripSchema = mongoose.Schema({
   //id automatically generated
   //we can now import this model into our app
   
-  module.exports = mongoose.model('trips', userSchema);
+  module.exports = mongoose.model('trip', tripSchema);
