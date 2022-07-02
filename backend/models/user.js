@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
     hashedPassword: { type: String, required: true },
     carSize: { type: String, required: true },
     userId: { type: String, required: true,unique:true },
-    fuelcost: { type: Number, required: true },
+    fuelCost: { type: Number, required: true },
     fuelType:{ type: String, required: true },
     coinsTotal:{ type: Number, required: true },
     co2emission_total:{ type: Number, required: true },
