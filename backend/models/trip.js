@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 //contains all the fields our model is going to contain
 const tripSchema = mongoose.Schema({
+
     carSize: { type: String, required: true },
-    userId: { type: String, required: true,unique:true },
+    userId: { type: String, required: true},
     fuelCost: { type: Number, required: true },
     fuelType:{ type: String, required: true },
     coinsTotal:{ type: Number, required: true },

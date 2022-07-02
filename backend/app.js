@@ -1,19 +1,10 @@
 const express = require('express');
-const app = express();
-app.use(express.json());
-
-
-const User = require('../models/user');
-const Trip = require('../models/trip');
-
-const userRoutes = require('./routes/signUp');
-const tripRoutes = require('./routes/tripDetails');
-const emissionRoutes = require('./routes/dailyTarget');
-const signInRoutes = require('./routes/signIn');
-const signOutRoutes = require('./routes/signOut');
-
-
+const parser = require('body-parser');
 const mongoose = require('mongoose');
+const Trip = require('./models/trip');
+const tripRoutes = require('./routes/tripDetails');
+
+const app = express();
 
 mongoose.connect('mongodb+srv://user0:PrVZsRbgCPkb7L8Y@trips.6eqhgof.mongodb.net/?retryWrites=true')
   .then(() => {
@@ -24,6 +15,8 @@ mongoose.connect('mongodb+srv://user0:PrVZsRbgCPkb7L8Y@trips.6eqhgof.mongodb.net
     console.error(error);
   });
 
+  
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -31,11 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/auth', userRoutes);
-app.use('/api/trip-details', tripRoutes);
-app.use('/api/emission-target', emissionRoutes);
-app.use('/api/sign-in', signInRoutes);
-app.use('/api/sign-out', signOutRoutes);
+app.use('/api/tripDetails', tripRoutes);
 
 
 module.exports = app;
