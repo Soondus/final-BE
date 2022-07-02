@@ -1,13 +1,11 @@
 const express = require('express');
-
 const app = express();
-
 app.use(express.json());
 
-const mongoose = require('mongoose');
-const person = require("./models/user");
-const trip = require("./models/trip");
+const userRoutes = require('./routes/user');
+const tripRoutes = require('./routes/trip');
 
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb+srv://user0:PrVZsRbgCPkb7L8Y@trips.6eqhgof.mongodb.net/?retryWrites=true')
   .then(() => {
@@ -25,28 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api',(req, res, next) => {
-    console.log('Request received');
-    res.json({message: "Hello from server!"});
-    next();
-});
-
-app.get('/api',(req, res, next) => {
-    res.status(201);
-    next();
-});
-
-app.use((req, res, next) => {
-    res.json({message: 'Your request was successful!'});
-    
-    next();
-});
-
-app.use((req, res, next) => {
-    console.log('Request sent successfully!');
-    
-});
-
-
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
