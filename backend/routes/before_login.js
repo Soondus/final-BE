@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const Person = require('../models/user');
+const User = require('../models/user');
 const Trip = require('../models/trip');
 
 //its going to receive a thing from the request body parser
@@ -111,7 +111,7 @@ router.post('/',(req,res,next)=> {
   
 //if user already registered
 //sign-in
-router.find('/sign-in',(req, res, next) => {
+router.post('/sign-in',(req, res, next) => {
     person.findOne({email:req.body.email}).then(
         (thing) => {
         res.status(200).json(thing);
@@ -125,4 +125,5 @@ router.find('/sign-in',(req, res, next) => {
     );
       });
   
+      
       module.exports = router; //export the router

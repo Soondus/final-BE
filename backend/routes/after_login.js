@@ -2,31 +2,61 @@
 const express = require('express');
 const router = express.Router();
 
-const person = require('./models/user');
-const trip = require('./models/trip');
-const { find } = require('../models/user');
+const User = require('./models/user');
+const Trip = require('./models/trip');
 
 
 //once logged in
-    /*enter trip details
-    router.get('/TripDetails'(req, res, next) => {
-        trip.find().then(
+    router.post('/Tripdetails/:id',(req,res,next)=> {
+        console.log(req.body); 
 
-        });
+    //get all trips
+    Trip.find({userId:req.params.id}).then(
+        (trips) => {
+            res.status(200).json(trips);
+        }
+    ).catch(
+        (error) => {
+            res.status(404).json({
+                message: 'User not found!'
+            });
+        }
+    );
+    }
+    );
 
 
-    router.find('/TripDetails')
+    const trip = new Trip({
+        carSize: req.body.carSize,
+        fuelType: req.body.fuelType,
+        distance: req.body.distance,
+        date: req.body.date,
+        time: req.body.time,
+        userId: req.body.userId
+    }); 
+        trip.save().then(
+            () => {
+                res.status(201).json({
+                    message: 'Trip saved successfully!'
+                });
+            }) .catch(
+            (error) => { res.status(400).json({
+                error: error });
+            }
+        );
 
-*/
- //mongoose allows us to modify things
- //allow user to change their details -- must be logged in
+   //etails
 
- app.put('/:id', (req, res, next) => {
+
+    //mongoose allows us to modify things
+    //allow user to change their details -- must be logged in
+
+    router.put('/myaccount/:id', (req, res, next) => {
  //we need to create a new thing and 
  //update the thing in its position
  //but if we create a new thing it will create a new id
  
- const person = new person({
+ const person = new User({
    _id: req.params.id,
     name: req.body.name,
     email: req.body.email,
@@ -36,7 +66,7 @@ const { find } = require('../models/user');
     userId: req.body.userId
  
  });
-   person.updateOne({_id:req.params.id},thing).then(
+   User.updateOne({_id:req.params.id},thing).then(
      () => {
        res.status(201).json({
          message:'details updated successfully!'
@@ -57,7 +87,7 @@ const { find } = require('../models/user');
  //now we will only intercept all the requests
  
 
-   app.use((req, res, next) => {
+   router.use((req, res, next) => {
     res.json({message: 'Your request was successful!'});
     
     next();
@@ -66,9 +96,9 @@ const { find } = require('../models/user');
     //user can see their points
     // on history route?
 
-    router.find('/Points/:id',(req, res, next) => {
-        person.findOne({points:req.body.points}).
-        then(person)}).catch(
+    router.use('/Points/:id',(req, res, next) => {
+        Trip.findOne({points:req.body.points}).
+        then(trip)}).catch(
             (error) => {
                 res.status(400).json({
                     error: error
@@ -82,8 +112,23 @@ const { find } = require('../models/user');
  
  
  router.get('/Emissions')
- router.find('//Emissions')
- router.find('/History')
- 
+ router.get('//Emissions')
+ router.get('/History')
 
- module.exports = router;
+ router.get('/' +
+  '', (req, res, next) => {
+  Thing.find().then(
+    (things) => {
+      res.status(200).json(things);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+module.exports = router;
+ 
