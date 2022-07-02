@@ -1,5 +1,5 @@
 
-const Trip = require('../models/tripDetails');
+const Trip = require('../models/trip');
 
 exports.createTrip = (req,res,next)=> {
     const trip = new Trip({

@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Trip = require('../models/trip');
 
-const tripControl = require('../controllers/tripDetails');
+const tripCtrl = require('../controllers/tripDetails');
 
-router.get('/', tripControl.getTrip);
-router.post('/:id', tripControl.createTrip);
-router.get('/:id' + '', tripControl.getAllTrips);
-router.put('/:id', tripControl.modifyTrip);
-router.delete('/:id', tripControl.deleteTrip);
+router.get('/' + '', tripCtrl.getAllTrips);
+router.post('/', tripCtrl.createTrip);
+router.get('/:id', tripCtrl.getOneTrip);
+router.put('/:id', tripCtrl.modifyTrip);
+router.delete('/:id', tripCtrl.deleteTrip);
 
   
 module.exports = router;
