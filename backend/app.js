@@ -33,5 +33,9 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', userRoutes);
 app.use('/api/trip-details', tripRoutes);
+app.use('/api/emission-target', emissionRoutes);
+app.use('/api/sign-in', signInRoutes);
+app.use('/api/sign-out', signOutRoutes);
+
 
 module.exports = app;
