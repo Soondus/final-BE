@@ -4,6 +4,19 @@ const app = express();
 
 app.use(express.json());
 
+/*const mongoose = require('mongoose');
+const person = require("./models/users");
+const trip = require("/models/trips");
+
+
+mongoose.connect('mongodb+srv://user0:PrVZsRbgCPkb7L8Y@trips.6eqhgof.mongodb.net/?retryWrites=true')
+  .then(() => {
+    console.log('Successfully connected to MongoDB Atlas!');
+  })
+  .catch((error) => {
+    console.log('Unable to connect to MongoDB Atlas!');
+    console.error(error);
+  });*/
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
