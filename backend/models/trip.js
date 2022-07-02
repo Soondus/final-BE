@@ -13,6 +13,7 @@ const tripSchema = mongoose.Schema({
     time:{ type: Number, required: true },
     co2emission:{ type: Number, required: true },
     distance:{type: Number, required: true },
+    dailyLimit:{type: Number, required: true },
   
   });
   //id automatically generated

@@ -6,9 +6,11 @@ app.use(express.json());
 const User = require('../models/user');
 const Trip = require('../models/trip');
 
-const userRoutes = require('./routes/before_login');
-const tripRoutes = require('./routes/userDetails');
-
+const userRoutes = require('./routes/signUp');
+const tripRoutes = require('./routes/tripDetails');
+const emissionRoutes = require('./routes/dailyTarget');
+const signInRoutes = require('./routes/signIn');
+const signOutRoutes = require('./routes/signOut');
 
 
 const mongoose = require('mongoose');
@@ -29,7 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//app.use('/api/auth', userRoutes);
-//app.use('/api/trip-details', tripRoutes);
+app.use('/api/auth', userRoutes);
+app.use('/api/trip-details', tripRoutes);
 
 module.exports = app;

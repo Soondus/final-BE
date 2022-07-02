@@ -205,9 +205,9 @@ module.exports = router;
  
  
  
- router.get('/Emissions')
+ /*router.get('/Emissions')
  router.get('//Emissions')
- router.get('/History')
+ router.get('/History')*/
 
  router.get('/' +
   '', (req, res, next) => {

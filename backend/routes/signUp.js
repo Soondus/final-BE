@@ -13,7 +13,7 @@ router.post('/',(req,res,next)=> {
     console.log(req.body);
  
     //sign up
-   const person = new person({
+   const person = new User({
      name: req.body.name,
      email: req.body.email,
      password: req.body.password,
@@ -35,7 +35,7 @@ router.post('/',(req,res,next)=> {
    });
  
    router.get('/:id', (req, res, next) => {
-      Person.findById(req.params.id).then(
+    User.findById(req.params.id).then(
         (person) => {
           res.status(200).json(person);
         }
@@ -50,16 +50,14 @@ router.post('/',(req,res,next)=> {
     
     router.put('/:id', (req, res, next) => {
 
-      const person = new Person({
+      const person = new User({
         _id: req.params.id,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        carSize: req.body.carSize,
-        fuelType: req.body.fuelType,
         userId: req.body.userId
       });
-      Person.updateOne(req.params.id).then(
+      User.updateOne(req.params.id).then(
         () => {
           res.status(201).json({
             message: 'User updated successfully!'
@@ -75,7 +73,7 @@ router.post('/',(req,res,next)=> {
 
     //if user wants to delete their account
   router.delete('/:id', (req, res, next) => {
-    Person.deleteOne({
+    User.deleteOne({
       _id: req.params.id
     }).then(() => {
       res.status(200).json({
@@ -92,38 +90,23 @@ router.post('/',(req,res,next)=> {
 }
 );
 
-    
-  router.get('/sign-up', (req, res, next) => {
-    //leaving the find() empty as we want to retrieve everything from the db
-    //then we send a promise to receive an array of all the things if available
-    person.find().then(
-        (things) => {
-          res.status(200).json(things);
-        }
-      ).catch(
-        (error) => {
-          res.status(400).json({
-            error:error
-          });
-        }
-      );
-    });
   
 //if user already registered
 //sign-in
-router.post('/sign-in',(req, res, next) => {
-    person.findOne({email:req.body.email}).then(
-        (thing) => {
-        res.status(200).json(thing);
-        }
+router.get('/' +
+    '', (req, res, next) => {
+      User.find().then(
+      (person) => {
+        res.status(200).json(trip);
+      }
     ).catch(
-        (error) => {
+      (error) => {
         res.status(400).json({
-            error:error
-          });
-        }
+          error: error
+        });
+      }
     );
-      });
+  });
   
-      
-      module.exports = router; //export the router
+ 
+  module.exports = router; //export the router
