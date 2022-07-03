@@ -73,7 +73,19 @@ exports.getOneTrip = (req, res, next) => {
   };
 
     exports.deleteTrip = (req, res, next) => {
-    Trip.deleteOne({_id: req.params.id}).then(
+    Trip.findOne({_id: req.params.id}).then(
+        (trip) => {
+            if (!trip) {
+                return res.status(404).json({
+                    error: new Error('Trip not found!')
+                });
+            }
+            if (trip.userId !== req.auth.userId) {
+                return res.status(401).json({
+                    error: new Error('Not authorized!')
+                });
+            }
+        Trip.deleteOne({_id: req.params.id}).then(
         () => {
         res.status(200).json({
             message: 'Deleted!'
@@ -87,6 +99,9 @@ exports.getOneTrip = (req, res, next) => {
         }
     );
     }
+    );
+    }
+
 
     exports.getAllTrips = (req, res, next) => {
         Trip.findOne().then(
