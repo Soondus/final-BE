@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 //import user model
 const User = require('../models/user');
 
@@ -44,10 +45,14 @@ exports.login = (req, res, next) => {
                             error: new Error('Invalid password!')
                         });
                     }
+                    const token = jwt.sign(
+                        {userId: user._id },  
+                        'RANDOM_TOKEN_SECRET',
+                        {expiresIn: '24h'});                 
                     //password is correct, send token
                     res.status(200).json({
-                        userId: user._id,
-                        token:'token' //generic token for now
+                        userId: user._id, 
+                        token:'token' //we need a token here to verify the user
                     });
                 }
                 //if bcrypt goes wrong send back error
@@ -67,8 +72,7 @@ exports.login = (req, res, next) => {
             });
         }
     );
-
-};
+}
 
 //no log out as using token based authentication (more secure than sessions and tokens)
 //installed npm bcryptjs
