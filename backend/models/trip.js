@@ -6,7 +6,7 @@ const tripSchema = mongoose.Schema({
     userId: { type: String, required: true},
     fuelCost: { type: Number, required: true },
     fuelType:{ type: String, required: true },
-    coinsTotal:{ type: Number, required: true },
+    coinsTotal:{ type: Number, required: true }, //total amount of coins change to $sum
     co2emission_total:{ type: Number, required: true },
     coinsEarned: { type: Number, required: true },
     date:{ type: String, required: true },
