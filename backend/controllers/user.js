@@ -76,3 +76,5 @@ exports.login = (req, res, next) => {
 
 //no log out as using token based authentication (more secure than sessions and tokens)
 //installed npm bcryptjs
+//installed npm jsonwebtoken
+//middleware checking the token to be implemented as a security measure with every route that needs authentication
