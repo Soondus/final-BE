@@ -2,6 +2,7 @@
 const Trip = require('../models/trip');
 
 exports.createTrip = (req,res,next)=> {
+    req.time = new Date().toString();
     const trip = new Trip({
      carSize: req.body.carSize,
      fuelType: req.body.fuelType,
@@ -9,8 +10,7 @@ exports.createTrip = (req,res,next)=> {
      co2emission_total: req.body.co2emissions,
      co2emissions: req.body.co2emissions,
      dailyLimit: req.body.dailyLimit,
-     date: req.body.date,
-     time: req.body.time,
+     time:req.time,
      userId: req.body.userId
    });                                              
  trip.save().then(
@@ -53,8 +53,6 @@ exports.getOneTrip = (req, res, next) => {
         carSize: req.body.carSize,
         fuelType: req.body.fuelType,
         distance: req.body.distance,
-        date: req.body.date,
-        time: req.body.time,
         userId: req.body.userId
     });
     Trip.updateOne({_id: req.params.id}, trip).then(
